@@ -32,7 +32,7 @@ def sendtweet(tweet, image_path = ""):
     status = api.update_with_media(image_path, tweet) # for images
 
 
-# I'm using this guy's SpeedTest python script to generate the results log:
+# I'm using this guy's SpeedTest python script to generate the SpeedTest results log:
 # https://github.com/sivel/speedtest-cli
 	
 import csv
@@ -53,23 +53,32 @@ badcount = 0
 rownum = 0
 
 # this is inelegant, but it works well enough and it's still only 10 lines
-while len(slowcount) < 4:
+
+# my RPi has a cron job set up to run the SpeedTest script every 15 minutes
+# I only care if my speed is slow for an hour or more, so I'm looking for
+# four consecutive slow speeds.
+consecutiveslows = 4
+
+# I picked 25 mbps, but if you want a different number you'll wanna change this
+slowlimit = 25
+
+while len(slowcount) < consecutiveslows:
 
 	rownum = rownum + 1
 
-	if len(speeds[rownum]) == 8:
+	if len(speeds[rownum]) == 8: # ignore rows where proper results didn't come back
 		downspeed = round((float(speeds[rownum][6]) / (1024)) / 1024,1)
 
-		# I picked 25 mbps, but if you want a different number you'll wanna change this
-		if downspeed > 25:
+		if downspeed > slowlimit:
 			break
 		else:
 			slowcount.append(downspeed)
 	else:
 		badcount = badcount + 1
+		# not doing anything with bad results besides counting them, but if you
+		# get a lot, maybe you want to set some kind of threshold and action
 
-
-if len(slowcount) == 4:
+if len(slowcount) == consecutiveslows:
 
 	maxspeed = 0
 	
