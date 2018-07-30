@@ -52,7 +52,7 @@ fastcount = 0
 badcount = 0
 rownum = 0
 
-# this is inelegant, but it works well enough and it's still only 10 lines
+# this is inelegant, but it works well enough and it's still pretty lightweight
 
 # my RPi has a cron job set up to run the SpeedTest script every 15 minutes
 # I only care if my speed is slow for an hour or more, so I'm looking for
@@ -86,4 +86,4 @@ if len(slowcount) == consecutiveslows:
 		if slowspeed > maxspeed:
 			maxspeed = slowspeed
 
-	sendtweet("@comcast My speeds top out at " + str(maxspeed) + " mbps. Paying for more than twice that. #NotGettingWhatIPayFor #ComcastIsSlow")
+	sendtweet("@comcast My speeds top out at " + str(maxspeed) + " mbps, but I'm paying for more than twice that.")
