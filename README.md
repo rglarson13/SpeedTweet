@@ -9,4 +9,4 @@ This project is a bit discombobulated -- I used speedtest-cli (like I do in Weat
 
 Then speedtweet.py takes a look and checks if I've had slow speeds for an hour. If so, it automatically tweets at Comcast. I wrote it in Python because I wanted it to run on the Raspberry Pi without too much fuss.
 
-And because I had the data I decided to create a graph of my speeds so I could see performance over time, then upload the PNG to a site that I can view over the internet. PlotIt.r is written in R because that's what I initially used when I was looking at my speedtest data, so I just spun out a little script for that.
+And because I had the data I decided to create a graph of my speeds so I could see performance over time, then upload the PNG to a site that I can view over the internet. PlotIt.r is written in R because that's what I initially used when I was looking at my speedtest data, so I just spun out a little script for that. The Python script (plotit.py) is an updated version written so that the whole process lives on my Raspberry Pi.
